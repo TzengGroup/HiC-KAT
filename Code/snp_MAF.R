@@ -43,7 +43,8 @@ Zmatrix <- data.frame(rep(NA,length(index.hic)))
 Zmatrix$locus <- loci.vec[index.hic]
 
 # Loop through each valid interacting locus to extract and filter SNPs
-for (i in 1:length(index.hic)){
+k <- 1
+for (i in index.hic){
   
   # Extract the genotype matrix for the current locus
   tmp_geno <- input.genotype[[i]]$genotypes
@@ -57,8 +58,10 @@ for (i in 1:length(index.hic)){
   snp <- cbind(snp, tmp_geno[, which(MAF_geno < q.therashold)])
   
   # Record summary statistics in the Zmatrix for this locus
-  Zmatrix$snp[i] <- dim(tmp_geno)[2]                             # Total SNPs initially available
-  Zmatrix$included.SNP[i] <- length(which(MAF_geno < q.therashold)) # Total SNPs kept after filtering
+  Zmatrix$snp[k] <- dim(tmp_geno)[2]                             # Total SNPs initially available
+  Zmatrix$included.SNP[k] <- length(which(MAF_geno < q.therashold)) # Total SNPs kept after filtering
+  
+  k <- k + 1
 }
 
 # Clean up the initialization columns (the first column of NAs)
