@@ -15,9 +15,9 @@ size <- chromsize[which(chromsize[,1] == which.chr),2]
 
 # Conditionally load the appropriate FitHiC workspace (.RData) based on the specified cell type
 if (HiC.data == "LCL"){
-  load("../FitHiC/LCL - 10k resolution - hg19/LCL_FitHiC.RData")
+  load("../FitHiC/data/LCL - 10k resolution - hg19/LCL_FitHiC.RData")
 }else if (HiC.data == "LV"){
-  load("../FitHiC/Left Ventricle - 10k resolution/LeftVentricle_FitHiC.RData")
+  load("../FitHiC/data/Left Ventricle - 10k resolution/LeftVentricle_FitHiC.RData")
 }
 
 # Extract the FitHiC data specifically for the target chromosome 
