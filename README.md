@@ -1,14 +1,14 @@
-# Hi-C Informed Kernel Association Test (HICKAT)
+# Hi-C Informed Kernel Association Test (HiC-KAT) for Integrating 3D Genome Structure into Variant-Set Analysis
 
 ## Overview
 
-The Hi-C Informed Kernel Association Test (HICKAT) is an advanced statistical framework designed to integrate three-dimensional (3D) genome architecture into variant-set association analyses for whole-genome sequencing (WGS) data.  
+The Hi-C Informed Kernel Association Test is an advanced statistical framework designed to integrate three-dimensional (3D) genome architecture into variant-set association analyses for whole-genome sequencing (WGS) data.  
 
-While traditional variant-set analyses (like SKAT) aggregate signals to improve statistical power for rare variants, they typically ignore spatial chromatin interactions. HICKAT extends this by offering a gene-agnostic, whole-genome testing strategy. It adaptively incorporates information from loci that physically interact with a target variant set in 3D space, ensuring that interacting loci with higher contact confidence contribute more to the association test. 
+While traditional variant-set analyses (like SKAT) aggregate signals to improve statistical power for rare variants, they typically ignore spatial chromatin interactions. HiC-KAT extends this by offering a gene-agnostic, whole-genome testing strategy. It adaptively incorporates information from loci that physically interact with a target variant set in 3D space, ensuring that interacting loci with higher contact confidence contribute more to the association test. 
 
 ## Core Methodology
 
-The HICKAT workflow consists of four primary steps:  
+The HiC-KAT workflow consists of four primary steps:  
 
 1. Obtain Hi-C Contact Confidence: The genome is partitioned into 10-kb regions (loci). Hi-C contact data is evaluated using q-values (via tools like Fit-Hi-C) to quantify the statistical significance of spatial proximity between locus pairs.
 2. Convert q-values to Borrowing Weights: Contact q-values are first transformed into Z-scores. For significant interactions ($q < 0.05$), these Z-scores are mapped to a weight value ($w$) between 0 and 1 using a Gamma cumulative distribution function (CDF). A controlling parameter, $c$, regulates the degree of information borrowing.
@@ -17,7 +17,7 @@ The HICKAT workflow consists of four primary steps:
 
 ## Project Structure and Scripts
 
-+ HiC-KAT.R (Main Execution): The primary entry point. It defines the HICKAT wrapper function, iterates over a vector of spatial bandwidths (cv.vec), and calculates the final combined ACAT p-value.  
++ HiC-KAT.R (Main Execution): The primary entry point. It defines the HiC-KAT wrapper function, iterates over a vector of spatial bandwidths (cv.vec), and calculates the final combined ACAT p-value.  
 + Essential functions and data_cluster.R: Sets up the global environment. It loads necessary R packages (rARPACK, CompQuadForm) and helper functions (like the Gamma CDF pga used for weight conversion).
 + mainCode.R: Performs the core mathematical operations, deriving the asymptotic p-value using eigenvalue decomposition on the kernel matrices.
 + snp_MAF.R: Identifies genomic bins interacting with the focal locus within the $\pm 1$ Mb window , extracts the sparse genotype matrices, and filters SNPs based on a Minor Allele Frequency (MAF) threshold.
