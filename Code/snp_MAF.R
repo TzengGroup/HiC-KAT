@@ -79,10 +79,6 @@ rm(input.genotype)
 # Convert the final SNP data frame into a standard matrix
 snp <- as.matrix(snp)
 
-# Convert to a sparse matrix to heavily optimize memory usage and speed up 
-# downstream algebraic operations (highly recommended for large genomic datasets)
-snp <- Matrix::Matrix(data = snp, sparse = TRUE)
-
 # Calculate final dataset dimensions and MAFs for the retained markers
 nmarker <- ncol(x = snp)
 MAF <- Matrix::colMeans(x = snp) / 2.0
