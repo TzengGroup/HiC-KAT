@@ -85,7 +85,7 @@ snp <- Matrix::Matrix(data = snp, sparse = TRUE)
 
 # Calculate final dataset dimensions and MAFs for the retained markers
 nmarker <- ncol(x = snp)
-MAF <- colMeans(x = snp) / 2.0
+MAF <- Matrix::colMeans(x = snp) / 2.0
 
 # Print the final dimensions of the sparse SNP matrix to the console
 cat("dim of snp", dim(snp))
