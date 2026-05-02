@@ -54,3 +54,9 @@ HICKAT(sample = 2000,
        input.genotype = simulated_data, 
        loci.vec = loci, 
        cv.vec = c(1/4, 1/5, 1/6, 1/7, 1/8, 1/100))
+
+```
+
+## Computational Considerations 
++ Parallelization of Spatial Bandwidths ($c$ values): The $Example.R$ script provides a sequential for loop over a grid of $c$ values strictly for illustrative purposes and ease of understanding. In a production environment, testing each $c$ value is completely independent. It is highly recommended to vectorize or parallelize this step.
++ ACAT Combination: Once the parallelized jobs return the array of observed p-values for a given locus, they can be instantly combined using the Aggregated Cauchy Association Test (ACAT) math provided at the end of the HICKAT function. This ensures optimal power without the computational penalty of running sequential tests.
